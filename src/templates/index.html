@@ -1,0 +1,56 @@
+{% if user.is_authenticated %}
+<head>
+  <script>
+    window.setTimeout(function () {
+      location.href = "https://update.compilingcoder.repl.co/";
+    }, 5000);
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<script>
+  if('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      // window.alert("Lat: " + String(position.coords.latitude) + "Long: " + String(position.coords.longitude));
+      window.location.replace("/position/"+String(position.coords.latitude)+"/"+String(position.coords.longitude));
+    });
+  } else {
+    
+  }
+</script>
+
+{{lat}}
+{{long}}
+{% if hunter %}
+<div class="d-flex justify-content-center"><h1>술래입니다!</h1></div>
+<!--<div class="d-flex justify-content-center">-->
+  
+
+    {% for player in player_list %}
+    <div class="col-sm-6">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        
+        <h5 class="card-title">{{player.name}}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">방향: {{player.direct}}</h6>
+        <p class="card-text">거리 (오차 0.5%): {{player.distance}} </p>
+        
+        <p class="card-text">위도, 경도: {{player.lat}}, {{player.long}} </p>
+        <a href="#" class="btn btn-primary {{player.abv}}">잡기</a>
+      </div>
+    </div>
+    </div>
+    {% endfor %}
+  
+<!--</div>-->
+{% else %}
+<h1>오... 잘 숨어다니세요 ㅋㅋ</h1>
+{%endif%}
+{%else%}
+<a href="https://update.compilingcoder.repl.co/logPassW">가입?</a>
+{%endif%}

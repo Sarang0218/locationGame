@@ -1,9 +1,7 @@
 {% if user.is_authenticated %}
 <head>
   <script>
-    window.setTimeout(function () {
-      location.href = "https://update.compilingcoder.repl.co/";
-    }, 5000);
+    
   </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,7 +15,10 @@
   if('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition((position) => {
       // window.alert("Lat: " + String(position.coords.latitude) + "Long: " + String(position.coords.longitude));
+      
+window.setTimeout(function () {
       window.location.replace("/position/"+String(position.coords.latitude)+"/"+String(position.coords.longitude));
+}, 1000);      
     });
   } else {
     

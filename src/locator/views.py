@@ -28,17 +28,24 @@ def index(request, lat=None, long=None):
         pl = Player.objects.filter(hunter=False)
         pl_dict = []
         for plObj in pl:
-          dcPrp = {}
-          cLoc = Location.objects.filter(player=plObj.user).reverse()[0]
-          pLoc = Location.objects.filter(player=plObj.user).reverse()[0]
-          dist = length((cLoc.lat, cLoc.long), (pLoc.lat, pLoc.long))
-          dcPrp["name"] = plObj.user.username
-          dcPrp["lat"] = round(cLoc.lat,2) 
-          dcPrp["long"] = round(cLoc.long,2)
-          dcPrp["distance"] = dist
-          dcPrp["direct"] = compDir(cLoc.lat- pLoc.lat, cLoc.long-cLoc.long)
-
-          pl_dict.append(dcPrp)
+          try:
+            dcPrp = {}
+            cLoc = Location.objects.filter(player=plObj.user).reverse()[0]
+            pLoc = Location.objects.filter(player=request.user).reverse()[0]
+            dist = length((cLoc.lat, cLoc.long), (pLoc.lat, pLoc.long))
+            dcPrp["name"] = plObj.user.username
+            dcPrp["lat"] = round(cLoc.lat,2) 
+            dcPrp["long"] = round(cLoc.long,2)
+            if dist > 1000:
+              
+              dcPrp["distance"] = f"{round(dist/1000, 2)}km"
+            else:
+              dcPrp["distance"] = f"{round(dist, 2)}m"
+            dcPrp["direct"] = compDir(cLoc.lat- pLoc.lat, cLoc.long-cLoc.long)
+            pl_dict.append(dcPrp)
+          except:
+              continue
+        
                         
           
         print(pl_dict)

@@ -20,4 +20,13 @@ while True:
       optionc = input("Would you like to create a superuser (Y/n)")
       if optionc == "Y":
         os.system("python src/manage.py createsuperuser")
+
+"""
+이건 그냥 기본 틀 ㅋㅋ 옆에 채팅으로 확인해주세요
+
+음... ㅋㅋㅋ 
+아
+그래서 일단 src/participater/views.py 로 가세요
+
+"""
         

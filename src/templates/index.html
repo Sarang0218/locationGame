@@ -18,7 +18,7 @@
       
 window.setTimeout(function () {
       window.location.replace("/position/"+String(position.coords.latitude)+"/"+String(position.coords.longitude));
-}, 1000);      
+}, 2000);      
     });
   } else {
     
@@ -33,6 +33,7 @@ window.setTimeout(function () {
   
 
     {% for player in player_list %}
+    
     <div class="col-sm-6">
     <div class="card" style="width: 18rem;">
       <div class="card-body">
@@ -42,11 +43,13 @@ window.setTimeout(function () {
         <p class="card-text">거리 (오차 0.5%): {{player.distance}} </p>
         
         <p class="card-text">위도, 경도: {{player.lat}}, {{player.long}} </p>
-        <a href="#" class="btn btn-primary {{player.abv}}">잡기</a>
+        <a href="/hunt/{{player.name}}" class="btn btn-primary {{player.abv}}">잡기</a>
       </div>
     </div>
     </div>
+   
     {% endfor %}
+  
   
 <!--</div>-->
 {% else %}
